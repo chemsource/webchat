@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Pages 聊天室 (LeanCloud版)</title>
+    <!-- LeanCloud SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leancloud-realtime@4.5.4/dist/realtime.browser.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+        #sidebar {
+            width: 250px;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-right: 1px solid #ddd;
+        }
+        #main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        #chat-area {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        #message-input {
+            padding: 20px;
+            border-top: 1px solid #ddd;
+            display: flex;
+        }
+        #message-input input {
+            flex: 1;
+            padding: 10px;
+            margin-right: 10px;
+        }
+        #message-input button {
+            padding: 10px 20px;
+        }
+        .channel {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #e0e0e0;
+            cursor: pointer;
+        }
+        .channel.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #create-channel {
+            margin-top: 20px;
+        }
+        .message {
+            margin-bottom: 10px;
+            padding: 8px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .message .sender {
+            font-weight: bold;
+            color: #333;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px;
+        }
+        .modal input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .modal button {
+            padding: 10px 15px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 登录模态框 -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <h2>登录</h2>
+            <input type="text" id="username-input" placeholder="用户名">
+            <input type="password" id="password-input" placeholder="密码">
+            <div style="margin-top: 20px;">
+                <button id="login-btn">登录</button>
+                <button id="register-btn">注册</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 创建频道模态框 -->
+    <div id="create-channel-modal" class="modal">
+        <div class="modal-content">
+            <h2>创建频道</h2>
+            <input type="text" id="channel-name-input" placeholder="频道名称">
+            <div style="margin-top: 20px;">
+                <button id="create-channel-btn">创建</button>
+                <button id="cancel-create-channel-btn">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主界面 -->
+    <div id="sidebar">
+        <h2>频道列表</h2>
+        <div id="channel-list"></div>
+        <button id="create-channel-btn-main">创建频道</button>
+    </div>
+    
+    <div id="main">
+        <div id="chat-area"></div>
+        <div id="message-input">
+            <input type="text" id="message-text" placeholder="输入消息...">
+            <button id="send-btn">发送</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
