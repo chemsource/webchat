@@ -1,8 +1,15 @@
 // LeanCloud 初始化 - 使用您提供的配置
-AV.init({
-    appId: 'K1Ti1lg1RKzrO0XekFjysCx8-MdYXbMMI',
-    appKey: 'kGVleuo6XC5PqYnSjQVZAiJt',
-    serverURL: 'https://k1ti1lg1.api.lncldglobal.com'
+AV.init({ 
+  appId: 'K1Ti1lg1RKzrO0XekFjysCx8-MdYXbMMI',
+  appKey: 'kGVleuo6XC5PqYnSjQVZAiJt',
+  serverURL: 'https://k1ti1lg1.api.lncldglobal.com' 
+});
+AV.Cloud.rpc('login', { username, password }, {
+  headers: {
+    'X-LC-Id': 'K1Ti1lg1RKzrO0XekFjysCx8-MdYXbMMI',
+    'X-LC-Key': 'kGVleuo6XC5PqYnSjQVZAiJt',
+    'Content-Type': 'application/json'
+  }
 });
 
 // 全局变量
